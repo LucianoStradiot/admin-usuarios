@@ -1,0 +1,161 @@
+{
+  "_version": "1.90.0",
+  "sap.app": {
+    "id": "com.claro.proveedores.adminusuarios",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:basic",
+      "version": "1.34.0",
+      "toolsId": "315f8b13-e072-4ae5-b487-10c356662054"
+    },
+    "dataSources": {
+      "PORTAL_PROVEEDORES_REST": {
+        "uri": "/PORTAL_PROVEEDORES_REST/",
+        "type": "http"
+      },
+      "ZMM_PORTAL_PROVEEDORES_SRV": {
+        "uri": "/sap/opu/odata/sap/ZMM_PORTAL_PROVEEDORES_SRV/",
+        "type": "OData",
+        "settings": {
+          "odataVersion": "2.0",
+          "localUri": "localService/ZMM_PORTAL_PROVEEDORES_SRV/metadata.xml"
+        }
+      },
+      "OdataServicePPC": {
+        "uri": "/v2/OdataServicePPC/",
+        "type": "OData",
+        "settings": {
+          "odataVersion": "2.0"
+        }
+      }
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "semantic_AdminUsuarios-action_display": {
+          "semanticObject": "AdministradorUsuarios",
+          "action": "display",
+          "title": "{{flpTitle}}",
+          "icon": "sap-icon://add-employee",
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          }
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": false,
+    "dependencies": {
+      "minUI5Version": "1.154.0",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "com.claro.proveedores.adminusuarios.i18n.i18n",
+          "supportedLocales": ["","en"],
+          "fallbackLocale": ""
+        }
+      },
+      "modeloDatos": {
+        "type": "sap.ui.model.odata.v2.ODataModel",
+        "settings": {
+          "defaultOperationMode": "Server",
+          "defaultBindingMode": "OneWay",
+          "defaultCountMode": "Request",
+          "useBatch": false
+        },
+        "dataSource": "ZMM_PORTAL_PROVEEDORES_SRV",
+        "preload": true
+      },
+      "modeloDatosCAP": {
+        "type": "sap.ui.model.odata.v2.ODataModel",
+        "settings": {
+          "defaultOperationMode": "Server",
+          "defaultBindingMode": "OneWay",
+          "defaultCountMode": "Request",
+          "useBatch": false
+        },
+        "dataSource": "OdataServicePPC",
+        "preload": true
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "controlAggregation": "pages",
+        "controlId": "app",
+        "transition": "slide",
+        "type": "View",
+        "viewType": "XML",
+        "path": "com.claro.proveedores.adminusuarios.view",
+        "async": true,
+        "viewPath": "com.claro.proveedores.adminusuarios.view"
+      },
+      "routes": [
+        {
+          "name": "view1",
+          "pattern": "",
+          "target": [
+            "View1"
+          ]
+        }
+      ],
+      "targets": {
+        "View1": {
+          "viewId": "View1",
+          "viewName": "View1"
+        }
+      }
+    },
+    "rootView": {
+      "viewName": "com.claro.proveedores.adminusuarios.view.App",
+      "type": "XML",
+      "id": "App",
+      "async": true
+    }
+  },
+  "sap.cloud": {
+    "public": true,
+    "service": "z_admin_usuarios"
+  }
+}

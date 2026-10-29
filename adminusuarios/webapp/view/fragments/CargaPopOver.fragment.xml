@@ -1,0 +1,18 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:f="sap.f" xmlns:u="sap.ui.unified" height="100%">
+	<Dialog title="Cargar Masiva Usuarios" class="sapUiContentPadding" contentWidth="500px">
+		<content>
+			<u:FileUploader id="idfileUploader" change="onChangeUploadFile" width="100%" sameFilenameAllowed="false" buttonText="Adjuntar" fileType="CSV"
+				placeholder="Adjunte un archivo CSV..." style="Transparent"></u:FileUploader>
+			<Text
+				text='Importante; Para crear usuarios debes seguir el formato de carga disponible en el siguiente link, los datos no deben contener acentos, ni símbolos: '
+				wrapping="true"></Text>
+			<VBox class="sapUiSmallMarginTop" justifyContent="Start" alignItems="Start">
+				<Link text="Descargar Formato" press="descargarFormatoCargaMasiva"></Link>
+			</VBox>
+		</content>
+		<buttons>
+			<Button id="cargar" text="Cargar" press="onUpload" type="Emphasized"/>
+			<Button id="close" text="Cancelar" press="cerrarDialogoCargaMasiva"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

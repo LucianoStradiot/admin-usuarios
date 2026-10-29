@@ -1,0 +1,45 @@
+{
+  "welcomeFile": "/index.html",
+  "authenticationMethod": "route",
+  "routes": [
+    {
+      "source": "^/v2/(.*)$",
+      "target": "/v2/$1",
+      "destination": "PORTAL_PROVEEDORES_CAP",
+      "authenticationType": "none",
+      "csrfProtection": false
+    },
+    {
+      "source": "^/PORTAL_PROVEEDORES_REST/(.*)$",
+      "target": "/PORTAL_PROVEEDORES_REST/$1",
+      "destination": "PORTAL_PROVEEDORES_CAP",
+      "authenticationType": "none",
+      "csrfProtection": false
+    },
+    {
+      "source": "^/sap/(.*)$",
+      "target": "/sap/$1",
+      "destination": "DESTINATION_FIORI_GW",
+      "authenticationType": "none",
+      "csrfProtection": false
+    },
+    {
+      "source": "^/resources/(.*)$",
+      "target": "/resources/$1",
+      "authenticationType": "none",
+      "destination": "ui5"
+    },
+    {
+      "source": "^/test-resources/(.*)$",
+      "target": "/test-resources/$1",
+      "authenticationType": "none",
+      "destination": "ui5"
+    },
+    {
+      "source": "^(.*)$",
+      "target": "$1",
+      "service": "html5-apps-repo-rt",
+      "authenticationType": "xsuaa"
+    }
+  ]
+}

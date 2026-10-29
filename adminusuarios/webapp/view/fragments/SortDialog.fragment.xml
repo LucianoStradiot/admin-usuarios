@@ -1,0 +1,13 @@
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<ViewSettingsDialog confirm="handleSortDialogConfirm" sortDescending="true" resetFilters="onResetSort">
+		<sortItems>
+			<ViewSettingsItem text="Nombre" key="DATA_AUTH0/name"/>
+			<ViewSettingsItem text="Correo" key="EMAIL"/>
+			<ViewSettingsItem text="Tipo usuario" key="DESCRIPTION_USERTYPE"/>
+			<ViewSettingsItem text="Última actualización" key="DATA_AUTH0/updated_at" selected="true"/>
+			<ViewSettingsItem text="Estado auth0" key="BLOCKED_AUTH0_TEXT"/>
+			<ViewSettingsItem text="Estado portal" key="DESCRIPTION_USERSTATUS"/>
+		</sortItems>
+	</ViewSettingsDialog>
+</core:FragmentDefinition>

@@ -1,0 +1,70 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+    xmlns:u="sap.ui.unified"
+    xmlns:l="sap.ui.layout">
+    <Dialog id="oDialogEdit" title="Editar usuario" type='Message' class="sapUiNoContentPadding" contentWidth="450px">
+        <content>
+        <MessageStrip class="sapUiTinyMargin" text="Última actualización: { path: 'oModelEdit>/DATA_AUTH0/updated_at',formatter: '.oTextDate' }" showIcon="true" showCloseButton="false" type="Information"></MessageStrip>
+            <l:Grid vSpacing="0.5" hSpacing="0.5" width="100%" class="sapUiTinyMargin">
+                <VBox class="sapUiTinyMarginTop">
+                    <Label text="Correo" required="true"/>
+                    <Input enabled="true" id="oInputCorreoUsuarioIdEditar" width="100%" liveChange="formatoCorreo" maxLength="300" value="{oModelEdit>/EMAIL}"/>
+                    <layoutData>
+                        <l:GridData span="XL12 L12 M12 S12"/>
+                    </layoutData>
+                </VBox>
+                <VBox>
+                    <Label text="Nombre" required="true"/>
+                    <Input id="oInputNombreUsuarioIdEditar" width="100%" maxLength="300" value="{oModelEdit>/DATA_AUTH0/name}"/>
+                    <layoutData>
+                        <l:GridData span="XL12 L12 M12 S12"/>
+                    </layoutData>
+                </VBox>
+                <VBox>
+                    <Label text="Tipo usuario" required="true"/>
+                    <Select id="oSelectTipoUsuarioIdEditar" width="100%" items="{path: 'oModelTipoUsuario>/', sorter: {path: 'DESCRIPTION'}, filters: [{path: 'DELETESTATUS',operator: 'EQ', value1: '1'}]}" selectedKey="{oModelEdit>/USERTYPEID_USERTYPEID}">
+                        <core:Item text="{oModelTipoUsuario>DESCRIPTION}" key="{oModelTipoUsuario>USERTYPEID}"></core:Item>
+                    </Select>
+                    <layoutData>
+                        <l:GridData span="XL7 L7 M7 S7"/>
+                    </layoutData>
+                </VBox>
+                <VBox>
+                    <Label text="Estado portal" required="true"/>
+                    <Select id="oSelectEstadoPortalIdEditar" width="100%" items="{path: 'oModelEstadoPortal>/', sorter: {path: 'DESCRIPTION'}, filters: [{path: 'DELETESTATUS',operator: 'EQ', value1: '1'}]}" selectedKey="{oModelEdit>/USERSTATUSID_USERSTATUSID}">
+                        <core:Item text="{oModelEstadoPortal>DESCRIPTION}" key="{oModelEstadoPortal>USERSTATUSID}"></core:Item>
+                    </Select>
+                    <layoutData>
+                        <l:GridData span="XL5 L5 M5 S5"/>
+                    </layoutData>
+                </VBox>
+                <VBox>
+                    <Label text="Estado auth0" required="true"/>
+                    <Select id="oSelectEstadoAuth0IdEditar" width="100%" items="{path: 'oModelEstadoAuth0>/', sorter: {path: 'text'}}" selectedKey="{oModelEdit>/DATA_AUTH0/blocked}">
+                        <core:Item text="{oModelEstadoAuth0>text}" key="{oModelEstadoAuth0>key}"></core:Item>
+                    </Select>
+                    <layoutData>
+                        <l:GridData span="XL4 L4 M4 S4"/>
+                    </layoutData>
+                </VBox>
+                <VBox>
+                    <Label text="Verificar cuenta"/>
+                    <VBox justifyContent="Center" alignItems="Center">
+                        <core:Icon class="sapUiTinyMarginTop" visible="{oModelEdit>/DATA_AUTH0/email_verified}" size="1rem" color="{= ${oModelEdit>/DATA_AUTH0/email_verified} === true ? '#30914c' : '#eaecee' }" src="{= ${oModelEdit>/DATA_AUTH0/email_verified} === true ? 'sap-icon://checklist-item-2' : 'sap-icon://less' }"/>
+                        <Button press="resendEmailVerification" visible="{= ${oModelEdit>/DATA_AUTH0/email_verified} === false ? true : false }" text="Reenviar" iconFirst="true" icon="sap-icon://email" type="Ghost"></Button>
+                    </VBox>
+                    <layoutData>
+                        <l:GridData span="XL4 L4 M4 S4"/>
+                    </layoutData>
+                </VBox>
+            </l:Grid>
+        </content>
+        <beginButton>
+            <Button text="Guardar" type="Emphasized" press="editarUsuario"/>
+        </beginButton>
+        <endButton>
+            <Button text="Cancelar" press="cerrarDialogoEdit"/>
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

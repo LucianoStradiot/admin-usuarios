@@ -1,0 +1,81 @@
+<mvc:View controllerName="com.claro.proveedores.adminusuarios.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+	xmlns="sap.m"
+	xmlns:fb="sap.ui.comp.filterbar"
+	xmlns:core="sap.ui.core"
+	xmlns:plugins="sap.m.plugins">
+	<Page id="page" title="{i18n>title}">
+		<headerContent>
+			<Button tooltip="{i18n>actualizar}" icon="sap-icon://synchronize" press="oActualizarVista"/>
+		</headerContent>
+		<content>
+			<fb:FilterBar id="filterbar" persistencyKey="myPersKey" useToolbar="false" search=".onSearch" showFilterConfiguration="false" showGoOnFB="false">
+				<fb:filterGroupItems>
+					<fb:FilterGroupItem name="Búsqueda" label="Búsqueda" groupName="Group1" visibleInFilterBar="true">
+						<fb:control>
+							<SearchField id="oSearchFieldProveedorId" liveChange="onLiveChangeLisProveedor" placeholder="Buscar por nombre, correo o tipo de usuario..."/>
+						</fb:control>
+					</fb:FilterGroupItem>
+				</fb:filterGroupItems>
+			</fb:FilterBar>
+
+			<Table id="oTableUsuarioId" alternateRowColors="false" updateFinished="oupdateFinishedTitle" inset="false" items="{oModeloUsuarioPortal>/DATA/}" fixedLayout="false" showNoData="true" noDataText="Sin datos">
+				<headerToolbar>
+					<OverflowToolbar>
+						<Title text="{oModeloUsuarioPortal>/TITULO_TABLA}" level="H2"/>
+						<Button tooltip="Descarga Excel" icon="sap-icon://excel-attachment" press="oDescargaExcel" enabled="{modelSettings>/enabledButtonTable}"/>
+						<ToolbarSpacer/>
+						<Button tooltip="Ordenar" icon="sap-icon://sort" press="handleSortButtonPressed" enabled="{modelSettings>/enabledButtonTable}"/>
+						<Button tooltip="Filtrar" icon="sap-icon://add-filter" press="handleFilterButtonPressed" enabled="{modelSettings>/enabledButtonTable}"/>
+						<Button text="Nuevo usuario" type="Emphasized" press="onDialogoNuevaUsuario"/>
+						<Button icon="sap-icon://vertical-grip" type="Transparent" tooltip="Más Opciones" press="openMoreOption"/>
+					</OverflowToolbar>
+				</headerToolbar>
+				<columns>
+					<Column hAlign="Left" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Block">
+						<Text text="Nombre"/>
+					</Column>
+					<Column hAlign="Left">
+						<Text text="Correo"/>
+					</Column>
+					<Column hAlign="Center" width="5rem" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline">
+						<Text text="Cuenta verificada"/>
+					</Column>
+					<Column hAlign="Left" width="9rem" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline">
+						<Text text="Tipo usuario"/>
+					</Column>
+					<Column hAlign="Center" width="5rem" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline">
+						<Text text="Última actualización"/>
+					</Column>
+					<Column hAlign="Center" width="7rem" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline">
+						<Text text="Proveedores" textAlign="Center"/>
+					</Column>
+					<Column hAlign="Center" width="6rem" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline">
+						<Text text="Perfiles" textAlign="Center"/>
+					</Column>
+					<Column hAlign="Center" width="4rem" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline">
+						<Text text="Estado auth0" textAlign="Center"/>
+					</Column>
+					<Column hAlign="Center" width="7rem" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline">
+						<Text text="Estado portal" textAlign="Center"/>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem vAlign="Middle" type="Detail" detailPress="onDialogoEditarUsuario">
+						<cells>
+							<Text text="{oModeloUsuarioPortal>DATA_AUTH0/name}"/>
+							<Text text="{oModeloUsuarioPortal>EMAIL}"/>
+							<core:Icon size="1rem" color="{= ${oModeloUsuarioPortal>DATA_AUTH0/email_verified} === true ? '#30914c' : '#eaecee' }" src="{= ${oModeloUsuarioPortal>DATA_AUTH0/email_verified} === true ? 'sap-icon://checklist-item-2' : 'sap-icon://less' }"/>
+							<Text text="{oModeloUsuarioPortal>DESCRIPTION_USERTYPE}"/>
+							<Text text="{ path: 'oModeloUsuarioPortal>DATA_AUTH0/updated_at',formatter: '.oTextDate' }"/>
+							<Button width="55px" enabled="{= ${oModeloUsuarioPortal>USERTYPEID_USERTYPEID} === '01' ? false : true }" text="{= ${oModeloUsuarioPortal>USERTYPEID_USERTYPEID} === '01' ? '' : ${oModeloUsuarioPortal>COUNT_PROVEEDORES}}" icon="{= ${oModeloUsuarioPortal>USERTYPEID_USERTYPEID} === '01' ? 'sap-icon://cancel' : 'sap-icon://supplier'}" iconFirst="true" press="openAddProveedores"></Button>
+							<Button enabled="{= ${oModeloUsuarioPortal>USERTYPEID_USERTYPEID} === '01' ? false : true }" text="{= ${oModeloUsuarioPortal>USERTYPEID_USERTYPEID} === '01' ? '' : 'Ver'}" icon="{= ${oModeloUsuarioPortal>USERTYPEID_USERTYPEID} === '01' ? 'sap-icon://cancel' : ''}" iconFirst="true" press="openAddPerfiles"></Button>
+							<ObjectStatus text="{= ${oModeloUsuarioPortal>BLOCKED_AUTH0} === true ? '⊗' : '✔' }" inverted="false" state="{ path: 'oModeloUsuarioPortal>BLOCKED_AUTH0',formatter: '.colorStateAuth0' }"/>
+							<ObjectStatus text="{oModeloUsuarioPortal>DESCRIPTION_USERSTATUS}" inverted="{ path: 'oModeloUsuarioPortal>USERSTATUSID_USERSTATUSID',formatter: '.invertedState' }" state="{ path: 'oModeloUsuarioPortal>USERSTATUSID_USERSTATUSID',formatter: '.colorState' }"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</content>
+	</Page>
+</mvc:View>

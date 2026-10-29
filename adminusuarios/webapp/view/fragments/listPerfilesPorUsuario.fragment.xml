@@ -1,0 +1,42 @@
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:u="sap.ui.unified">
+	<Dialog id="dialogAddPerfil" class="sapUiNoContentPadding" title="Perfiles asignados" type='Message' contentHeight="550px" contentWidth="400px">
+		<content>
+			<List id="listaPerfilesId" sticky="HeaderToolbar,InfoToolbar" noDataText="Sin perfil asignados" delete="onDeletePerfilXUsuario" mode="None" items="{ path: 'modeloPerfilesPorUsuario>/', sorter: [{ path: 'DELETESTATUS', descending: true,group: '.grouperPerfiles'}] }">
+				<headerToolbar>
+					<Toolbar>
+						<Title id="cantidadPerfilesId" text="Resultados (0)"/>
+						<ToolbarSpacer/>
+						<Button id="buttonAddPerfilesId" icon="sap-icon://add" type="Transparent" press="onListarPerfiles"></Button>
+						<ToggleButton id="buttonDeletePerfilesId" enabled="false" icon="sap-icon://delete" type="Transparent" pressed="false" press="onPressToggleButtonDeletePerfiles"></ToggleButton>
+					</Toolbar>
+				</headerToolbar>
+				<infoToolbar>
+					<Toolbar>
+						<SearchField id="oSearchFieldListPerfilesId" liveChange="onSearchListPerfil" placeholder="Buscar por nombre o código de perfil..."/>
+					</Toolbar>
+				</infoToolbar>
+				<CustomListItem>
+					<HBox alignItems="Center" class="sapUiTinyMargin">
+						<VBox class="sapUiTinyMarginBegin sapUiTinyMarginTopBottom">
+							<Label wrapping="true" text="{modeloPerfilesPorUsuario>DESCRIPTION}" design="Bold"/>
+							<Text text="{modeloPerfilesPorUsuario>PROFILEID}"></Text>
+							<HBox alignItems="Center">
+								<Label text="Estatus asignación portal:"></Label>
+								<Switch type="AcceptReject" change="onChangeStatusPerfil" state="{= ${modeloPerfilesPorUsuario>DELETESTATUS} === '0' ? false : true }">
+									<layoutData>
+										<FlexItemData growFactor="1" />
+									</layoutData>
+								</Switch>
+							</HBox>
+						</VBox>
+					</HBox>
+				</CustomListItem>
+			</List>
+		</content>
+		<buttons>
+			<Button text="Cancelar" press="closeAddPerfiles"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

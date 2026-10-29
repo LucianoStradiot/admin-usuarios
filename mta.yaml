@@ -1,0 +1,93 @@
+_schema-version: "3.2"
+ID: z_admin_usuarios
+version: 0.0.1
+modules:
+- name: z_admin_usuarios-destination-content
+  type: com.sap.application.content
+  requires:
+  - name: z_admin_usuarios-destination-service
+    parameters:
+      content-target: true
+  - name: z_admin_usuarios_html_repo_host
+    parameters:
+      service-key:
+        name: z_admin_usuarios_html_repo_host-key
+  - name: uaa_z_admin_usuarios
+    parameters:
+      service-key:
+        name: uaa_z_admin_usuarios-key
+  parameters:
+    content:
+      instance:
+        destinations:
+        - Name: z_admin_usuarios_z_admin_usuarios_html_repo_host
+          ServiceInstanceName: z_admin_usuarios-html5-app-host-service
+          ServiceKeyName: z_admin_usuarios_html_repo_host-key
+          sap.cloud.service: z_admin_usuarios
+        - Authentication: OAuth2UserTokenExchange
+          Name: z_admin_usuarios_uaa_z_admin_usuarios
+          ServiceInstanceName: z_admin_usuarios-xsuaa-service
+          ServiceKeyName: uaa_z_admin_usuarios-key
+          sap.cloud.service: z_admin_usuarios
+        existing_destinations_policy: ignore
+  build-parameters:
+    no-source: true
+- name: z_admin_usuarios-app-content
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: z_admin_usuarios_html_repo_host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+    - artifacts:
+      - comclaroproveedoresadminusuarios.zip
+      name: comclaroproveedoresadminusuarios
+      target-path: resources/
+- name: comclaroproveedoresadminusuarios
+  type: html5
+  path: adminusuarios
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+resources:
+- name: z_admin_usuarios-destination-service
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      HTML5Runtime_enabled: true
+      init_data:
+        instance:
+          destinations:
+          - Authentication: NoAuthentication
+            Name: ui5
+            ProxyType: Internet
+            Type: HTTP
+            URL: https://ui5.sap.com
+          existing_destinations_policy: update
+      version: 1.0.0
+    service: destination
+    service-name: z_admin_usuarios-destination-service
+    service-plan: lite
+- name: z_admin_usuarios_html_repo_host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-name: z_admin_usuarios-html5-app-host-service
+    service-plan: app-host
+- name: uaa_z_admin_usuarios
+  type: org.cloudfoundry.managed-service
+  parameters:
+    path: ./xs-security.json
+    service: xsuaa
+    service-name: z_admin_usuarios-xsuaa-service
+    service-plan: application
+parameters:
+  deploy_mode: html5-repo
+  enable-parallel-deployments: true
