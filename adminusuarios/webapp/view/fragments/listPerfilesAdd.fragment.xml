@@ -1,33 +1,34 @@
+
 <core:FragmentDefinition xmlns="sap.m"
-	xmlns:core="sap.ui.core"
-	xmlns:fb="sap.ui.comp.filterbar">
-	<Dialog busyIndicatorDelay='0' class="sapUiNoContentPadding" showHeader="true" title="Asignar perfiles" type='Message' contentHeight="550px" contentWidth="450px">
-		<content>
-			<MessageStrip visible="false" text="Ingresa un grupo de códigos de perfiles separados por coma para seleccionar múltiple" type="Information" showIcon="true" showCloseButton="false" class="sapUiTinyMarginBegin sapUiSmallMarginTop sapUiTinyMarginEnd">
-			</MessageStrip>
-			<fb:FilterBar id="oFilterbarPerfilesId" useToolbar="false" showFilterConfiguration="false" showGoOnFB="false">
-				<fb:filterGroupItems>
-					<fb:FilterGroupItem name="Cod.Perfil" label="Código perfil" groupName="Group1" visibleInFilterBar="true">
-						<fb:control>
-							<SearchField id="oSearchFieldCodPerfilId" liveChange="onlyUpperCaseAndSearch"/>
-						</fb:control>
-					</fb:FilterGroupItem>
-				</fb:filterGroupItems>
-			</fb:FilterBar>
-			<List id="oListSelectPerfilesId" selectionChange="onSelectedItemsPerfiles" mode="MultiSelect" headerText="Perfiles (0)" items="{oModelAllPerfiles>/}">
-				<CustomListItem>
-					<HBox alignItems="Center" class="sapUiTinyMargin">
-						<VBox class="sapUiTinyMarginBegin sapUiTinyMarginTopBottom">
-							<Label wrapping="true" text="{oModelAllPerfiles>DESCRIPTION}" design="Bold"/>
-							<Text text="{oModelAllPerfiles>PROFILEID}"></Text>
-						</VBox>
-					</HBox>
-				</CustomListItem>
-			</List>
-		</content>
-		<buttons>
-			<Button id="buttonGuardarPerfilesAsignar" enabled="false" type="Emphasized" text="Guardar" press="onGuardarNuevoPerfiles"/>
-			<Button text="Cancelar" press="closeonListarPerfiles"/>
-		</buttons>
-	</Dialog>
+    xmlns:core="sap.ui.core"
+    xmlns:fb="sap.ui.comp.filterbar">
+    <Dialog busyIndicatorDelay="0" class="sapUiNoContentPadding" showHeader="true" title="{i18n>asignarPerfiles}" type="Message" contentHeight="550px" contentWidth="450px">
+        <content>
+            <MessageStrip visible="false" text="{i18n>mensajeSeleccionMultiplePerfiles}" type="Information" showIcon="true" showCloseButton="false" class="sapUiTinyMarginBegin sapUiSmallMarginTop sapUiTinyMarginEnd">
+            </MessageStrip>
+            <fb:FilterBar id="oFilterbarPerfilesId" useToolbar="false" showFilterConfiguration="false" showGoOnFB="false">
+                <fb:filterGroupItems>
+                    <fb:FilterGroupItem name="Cod.Perfil" label="{i18n>codigoPerfil}" groupName="Group1" visibleInFilterBar="true">
+                        <fb:control>
+                            <SearchField id="oSearchFieldCodPerfilId" liveChange="onlyUpperCaseAndSearch"/>
+                        </fb:control>
+                    </fb:FilterGroupItem>
+                </fb:filterGroupItems>
+            </fb:FilterBar>
+            <List id="oListSelectPerfilesId" selectionChange="onSelectedItemsPerfiles" mode="MultiSelect" headerText="{i18n>perfilesSeleccionados} (0)" items="{oModelAllPerfiles>/}">
+                <CustomListItem>
+                    <HBox alignItems="Center" class="sapUiTinyMargin">
+                        <VBox class="sapUiTinyMarginBegin sapUiTinyMarginTopBottom">
+                            <Label wrapping="true" text="{oModelAllPerfiles>DESCRIPTION}" design="Bold"/>
+                            <Text text="{oModelAllPerfiles>PROFILEID}"></Text>
+                        </VBox>
+                    </HBox>
+                </CustomListItem>
+            </List>
+        </content>
+        <buttons>
+            <Button id="buttonGuardarPerfilesAsignar" enabled="false" type="Emphasized" text="{i18n>guardar}" press="onGuardarNuevoPerfiles"/>
+            <Button text="{i18n>cancelar}" press="closeonListarPerfiles"/>
+        </buttons>
+    </Dialog>
 </core:FragmentDefinition>

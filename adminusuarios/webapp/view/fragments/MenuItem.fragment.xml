@@ -1,5 +1,6 @@
+
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:u="sap.ui.unified">
-	<u:Menu>
-		<u:MenuItem text="Carga Masiva" select="openDialogoCargaMasiva" icon="sap-icon://add-document"/>
-	</u:Menu>
+    <u:Menu>
+        <u:MenuItem text="{i18n>cargaMasiva}" select="openDialogoCargaMasiva" icon="sap-icon://add-document"/>
+    </u:Menu>
 </core:FragmentDefinition>

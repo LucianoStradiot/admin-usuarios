@@ -25,6 +25,7 @@ sap.ui.define([
             },
 
             _onObjectMatched: function () {
+                this.i18n = this.getView().getModel("i18n").getResourceBundle();
                 this.openBusyDialog();
                 this.jsonDataUser = {
                     userName: "",
@@ -50,7 +51,7 @@ sap.ui.define([
                 this._router = oComponent.getRouter();
 
                 var modelSettings = new JSONModel({
-                    titluloUsuario: "Resultados (0)",
+                    titluloUsuario: this.i18n.getText("resultados", ["0"]),
                     enabledButtonTable: false
                 });
 
@@ -84,7 +85,7 @@ sap.ui.define([
             oActualizarVista: function () {
                 this.openBusyDialog();
                 var oModeloUsuarioPortal = new JSONModel({
-                    TITULO_TABLA: "Resultados (0)",
+                    TITULO_TABLA: this.i18n.getText("resultados", ["0"]),
                     DATA: []
                 });
                 this.getView().setModel(oModeloUsuarioPortal, "oModeloUsuarioPortal");
@@ -240,7 +241,7 @@ sap.ui.define([
                     });
 
                     this.BusyDialog.close();
-                    cantidadPerfiles.setText("Resultados (" + respuestaRU.length + ")");
+                    cantidadPerfiles.setText(this.i18n.getText("resultados", [respuestaRU.length]));
                     modeloPerfilesPorUsuario.setData(respuestaRU);
                     modeloPerfilesPorUsuario.refresh();
                     if (respuestaRU.length > 0) {
@@ -365,7 +366,7 @@ sap.ui.define([
                     });
 
                     this.BusyDialog.close();
-                    cantidadProveedores.setText("Resultados (" + respuestaRU.length + ")");
+                    cantidadProveedores.setText(this.i18n.getText("resultados", [respuestaRU.length]));
                     modeloProveedoresPorUsuario.setData(respuestaRU);
                     modeloProveedoresPorUsuario.refresh();
                     if (respuestaRU.length > 0) {
@@ -456,9 +457,9 @@ sap.ui.define([
                     });
                 } else {
                     if (valueINP.length < 5 || valueICP.length === 0) {
-                        MessageToast.show("Ingresa un mínimo de 5 letras para continuar con la búsqueda por nombre de proveedor");
+                        MessageToast.show(this.i18n.getText("ingresarMinimoCaracteresProveedor"));
                     } else {
-                        MessageToast.show("Ingresa un nombre o código de proveedor para continuar con la búsqueda");
+                        MessageToast.show(this.i18n.getText("ingresarNombreOCodigoProveedor"));
                     }
 
                 }
@@ -512,12 +513,12 @@ sap.ui.define([
                 param.PROFILEID = profileid;
                 param.DELETESTATUS = state ? "1" : "0";
 
-                MessageBox.show("¿Seguro deseas realizar está acción?", {
+                MessageBox.show(this.i18n.getText("confirmarAccion"), {
                     icon: sap.m.MessageBox.Icon.QUESTION,
-                    title: "Aviso",
-                    actions: ["Aceptar", "Cancelar"],
+                    title: this.i18n.getText("aviso"),
+                    actions: [this.i18n.getText("aceptar"), this.i18n.getText("cancelar")],
                     onClose: function (sAction) {
-                        if (sAction === 'Aceptar') {
+                        if (sAction === this.i18n.getText("aceptar")) {
                             this.openBusyDialog();
                             var url = this.getOwnerComponent().getManifestObject().resolveUri('../PORTAL_PROVEEDORES_REST/uStateUserProfiles');
                             var settings = {
@@ -535,7 +536,7 @@ sap.ui.define([
                                 this.setLogSystem("Actualización", oDataRU.message, oDataRU.data).then(function () {
                                     var respuestaRU = oDataRU;
                                     this.BusyDialog.close();
-                                    MessageToast.show("Proceso finalizado correctamente");
+                                    MessageToast.show(this.i18n.getText("procesoFinalizado"));
                                     this.closeAddPerfiles();
                                     this.levantarPerfiles();
                                 }.bind(this));
@@ -563,12 +564,12 @@ sap.ui.define([
                 param.VENDORID = supplier;
                 param.DELETESTATUS = state ? "1" : "0";
 
-                MessageBox.show("¿Seguro deseas realizar está acción?", {
+                MessageBox.show(this.i18n.getText("confirmarAccion"), {
                     icon: sap.m.MessageBox.Icon.QUESTION,
-                    title: "Aviso",
-                    actions: ["Aceptar", "Cancelar"],
+                    title: this.i18n.getText("aviso"),
+                    actions: [this.i18n.getText("aceptar"), this.i18n.getText("cancelar")],
                     onClose: function (sAction) {
-                        if (sAction === 'Aceptar') {
+                        if (sAction === this.i18n.getText("aceptar")) {
                             this.openBusyDialog();
                             var url = this.getOwnerComponent().getManifestObject().resolveUri('../PORTAL_PROVEEDORES_REST/uStateUsersvendors');
                             var settings = {
@@ -586,7 +587,7 @@ sap.ui.define([
                                 this.setLogSystem("Actualización", oDataRU.message, oDataRU.data).then(function () {
                                     var respuestaRU = oDataRU;
                                     this.BusyDialog.close();
-                                    MessageToast.show("Proceso finalizado correctamente");
+                                    MessageToast.show(this.i18n.getText("procesoFinalizado"));
                                     this.closeAddProveedores();
                                     this.levantarProveedores();
                                 }.bind(this));
@@ -610,12 +611,12 @@ sap.ui.define([
                 let param = {};
                 param.USERID = this.itemSeleccionadoUsuario.USERID;
                 param.VENDORID = supplier;
-                MessageBox.show("¿Seguro deseas realizar está acción?", {
+                MessageBox.show(this.i18n.getText("confirmarAccion"), {
                     icon: sap.m.MessageBox.Icon.QUESTION,
-                    title: "Aviso",
-                    actions: ["Aceptar", "Cancelar"],
+                    title: this.i18n.getText("aviso"),
+                    actions: [this.i18n.getText("aceptar"), this.i18n.getText("cancelar")],
                     onClose: function (sAction) {
-                        if (sAction === 'Aceptar') {
+                        if (sAction === this.i18n.getText("aceptar")) {
                             this.openBusyDialog();
                             var url = this.getOwnerComponent().getManifestObject().resolveUri('../PORTAL_PROVEEDORES_REST/dUsersvendors');
                             var settings = {
@@ -633,7 +634,7 @@ sap.ui.define([
                                 this.setLogSystem("Eliminación", oDataRU.message, oDataRU.data).then(function () {
                                     var respuestaRU = oDataRU;
                                     this.BusyDialog.close();
-                                    MessageToast.show("Proceso finalizado correctamente");
+                                    MessageToast.show(this.i18n.getText("procesoFinalizado"));
                                     this.closeAddProveedores();
                                     this.levantarProveedores();
                                 }.bind(this));
@@ -656,12 +657,12 @@ sap.ui.define([
                 let param = {};
                 param.USERID = this.itemSeleccionadoUsuario.USERID;
                 param.PROFILEID = profileid;
-                MessageBox.show("¿Seguro deseas realizar está acción?", {
+                MessageBox.show(this.i18n.getText("confirmarAccion"), {
                     icon: sap.m.MessageBox.Icon.QUESTION,
-                    title: "Aviso",
-                    actions: ["Aceptar", "Cancelar"],
+                    title: this.i18n.getText("aviso"),
+                    actions: [this.i18n.getText("aceptar"), this.i18n.getText("cancelar")],
                     onClose: function (sAction) {
-                        if (sAction === 'Aceptar') {
+                        if (sAction === this.i18n.getText("aceptar")) {
                             this.openBusyDialog();
                             var url = this.getOwnerComponent().getManifestObject().resolveUri('../PORTAL_PROVEEDORES_REST/dUserProfiles');
                             var settings = {
@@ -679,7 +680,7 @@ sap.ui.define([
                                 this.setLogSystem("Eliminación", oDataRU.message, oDataRU.data).then(function () {
                                     var respuestaRU = oDataRU;
                                     this.BusyDialog.close();
-                                    MessageToast.show("Proceso finalizado correctamente");
+                                    MessageToast.show(this.i18n.getText("procesoFinalizado"));
                                     this.closeAddPerfiles();
                                     this.levantarPerfiles();
                                 }.bind(this));
@@ -727,18 +728,18 @@ sap.ui.define([
 
             onGuardarNuevoPerfiles: function () {
 
-                MessageBox.show("¿Seguro desea realizar la asignación de perfiles?", {
+                MessageBox.show(this.i18n.getText("confirmarAsignacionPerfiles"), {
                     icon: sap.m.MessageBox.Icon.QUESTION,
-                    title: "Aviso",
-                    actions: ["Aceptar", "Cancelar"],
+                    title: this.i18n.getText("aviso"),
+                    actions: [this.i18n.getText("aceptar"), this.i18n.getText("cancelar")],
                     onClose: function (sAction) {
-                        if (sAction === 'Aceptar') {
+                        if (sAction === this.i18n.getText("aceptar")) {
                             this.openBusyDialog();
                             var oList = sap.ui.getCore().byId("oListSelectPerfilesId");
                             let functionRecorrer = function (items, i) {
                                 if (items.length === i) {
                                     this.BusyDialog.close();
-                                    MessageToast.show("Proceso finalizado correctamente");
+                                    MessageToast.show(this.i18n.getText("procesoFinalizado"));
                                     this.closeonListarPerfiles();
                                     this.closeAddPerfiles();
                                     this.levantarPerfiles();
@@ -791,12 +792,12 @@ sap.ui.define([
                 param.DATEFIRSTACCESS = null;
                 param.DELETESTATUS = "1";
 
-                MessageBox.show("¿Seguro desea realizar la asignación de este proveedor?", {
+                MessageBox.show(this.i18n.getText("confirmarAsignacionProveedor"), {
                     icon: sap.m.MessageBox.Icon.QUESTION,
-                    title: "Aviso",
-                    actions: ["Aceptar", "Cancelar"],
+                    title: this.i18n.getText("aviso"),
+                    actions: [this.i18n.getText("aceptar"), this.i18n.getText("cancelar")],
                     onClose: function (sAction) {
-                        if (sAction === 'Aceptar') {
+                        if (sAction === this.i18n.getText("aceptar")) {
                             this.openBusyDialog();
                             var url = this.getOwnerComponent().getManifestObject().resolveUri('../PORTAL_PROVEEDORES_REST/cUsersvendors');
                             var settings = {
@@ -814,16 +815,16 @@ sap.ui.define([
                                 this.setLogSystem("Creación", oDataRU.message, oDataRU.data).then(function () {
                                     var respuestaRU = oDataRU;
                                     this.BusyDialog.close();
-                                    MessageToast.show("Proceso finalizado correctamente");
+                                    MessageToast.show(this.i18n.getText("procesoFinalizado"));
                                     this.closeonListarProveedores();
                                     this.closeAddProveedores();
                                     this.levantarProveedores();
                                 }.bind(this));
                             }.bind(this)).fail(function (jqXHR, textStatus, errorThrown) {
                                 if (jqXHR.responseJSON.code === 301) {
-                                    MessageToast.show("Proveedor asignado previamente al usuario.");
+                                    MessageToast.show(this.i18n.getText("proveedorAsignadoPreviamente"));
                                 } else {
-                                    MessageToast.show("No fue posible finalizar correctamente el proceso.");
+                                    MessageToast.show(this.i18n.getText("errorFinalizarProceso"));
                                 }
                                 this.BusyDialog.close();
                             }.bind(this));
@@ -926,7 +927,7 @@ sap.ui.define([
                 var oModeloUsuarioPortal = this.getView().getModel("oModeloUsuarioPortal");
                 var modelSettings = this.getView().getModel("modelSettings");
                 var countData = oModeloUsuarioPortal.getData().DATA.length;
-                oModeloUsuarioPortal.setProperty("/TITULO_TABLA", "Resultados (" + this.currencyValue(countData).toString() + ")");
+                oModeloUsuarioPortal.setProperty("/TITULO_TABLA", this.i18n.getText("resultados", [this.currencyValue(countData).toString()]));
                 var cond = false;
                 if (countData > 0) {
                     cond = true;
@@ -940,7 +941,7 @@ sap.ui.define([
                 var oModeloUsuarioPortal = this.getView().getModel("oModeloUsuarioPortal");
                 var modelSettings = this.getView().getModel("modelSettings");
                 var countData = count;
-                oModeloUsuarioPortal.setProperty("/TITULO_TABLA", "Resultados (" + this.currencyValue(countData).toString() + ")");
+                oModeloUsuarioPortal.setProperty("/TITULO_TABLA", this.i18n.getText("resultados", [this.currencyValue(countData).toString()]));
                 var cond = false;
                 if (countData > 0) {
                     cond = true;
@@ -1080,11 +1081,11 @@ sap.ui.define([
                 this._oViewSettingsDialogEditUsuario.setModel(oModelEdit, "oModelEdit");
                 oModelEdit.setDefaultBindingMode(sap.ui.model.BindingMode.OneWay);
                 var oModelEstadoAuth0 = new JSONModel([{
-                    text: "Activo",
+                    text: this.i18n.getText("activo"),
                     key: false
                 },
                 {
-                    text: "Bloqueado",
+                    text: this.i18n.getText("bloqueado"),
                     key: true
                 }]);
 
@@ -1118,12 +1119,12 @@ sap.ui.define([
                     AccessToken: this.jsonDataAuth0.token_auth0,
                     Url: this.jsonDataAuth0.url
                 };
-                MessageBox.show("¿Seguro deseas realizar está acción?", {
+                MessageBox.show(this.i18n.getText("confirmarAccion"), {
                     icon: sap.m.MessageBox.Icon.QUESTION,
-                    title: "Aviso",
-                    actions: ["Aceptar", "Cancelar"],
+                    title: this.i18n.getText("aviso"),
+                    actions: [this.i18n.getText("aceptar"), this.i18n.getText("cancelar")],
                     onClose: function (sAction) {
-                        if (sAction === 'Aceptar') {
+                        if (sAction === this.i18n.getText("aceptar")) {
                             this.openBusyDialog();
                             var url = this.getOwnerComponent().getManifestObject().resolveUri('../PORTAL_PROVEEDORES_REST/uResendEmailVerification');
                             var settings = {
@@ -1138,9 +1139,9 @@ sap.ui.define([
                             };
 
                             $.ajax(settings).done(function (oDataRU) {
-                                    var respuestaRU = oDataRU;
-                                    this.BusyDialog.close();
-                                    MessageToast.show("Correo de verificación reenviado correctamente");
+                                var respuestaRU = oDataRU;
+                                this.BusyDialog.close();
+                                MessageToast.show(this.i18n.getText("correoVerificacionReenviado"));
                             }.bind(this)).fail(function (jqXHR, textStatus, errorThrown) {
                                 MessageToast.show(jqXHR.responseJSON.message);
                                 this.BusyDialog.close();
@@ -1178,12 +1179,12 @@ sap.ui.define([
                             AccessToken: this.jsonDataAuth0.token_auth0,
                             Url: this.jsonDataAuth0.url
                         };
-                        MessageBox.show("¿Seguro deseas realizar está acción?", {
+                        MessageBox.show(this.i18n.getText("confirmarAccion"), {
                             icon: sap.m.MessageBox.Icon.QUESTION,
-                            title: "Aviso",
-                            actions: ["Aceptar", "Cancelar"],
+                            title: this.i18n.getText("aviso"),
+                            actions: [this.i18n.getText("aceptar"), this.i18n.getText("cancelar")],
                             onClose: function (sAction) {
-                                if (sAction === 'Aceptar') {
+                                if (sAction === this.i18n.getText("aceptar")) {
                                     this.openBusyDialog();
                                     var url = this.getOwnerComponent().getManifestObject().resolveUri('../PORTAL_PROVEEDORES_REST/uUsersMaster');
                                     var settings = {
@@ -1201,7 +1202,7 @@ sap.ui.define([
                                         this.setLogSystem("Actualización", oDataRU.message, oDataRU.data).then(function () {
                                             var respuestaRU = oDataRU;
                                             this.BusyDialog.close();
-                                            MessageToast.show("Proceso finalizado correctamente");
+                                            MessageToast.show(this.i18n.getText("procesoFinalizado"));
                                             this.cerrarDialogoEdit();
                                             this.oActualizarVista();
                                         }.bind(this));
@@ -1214,7 +1215,7 @@ sap.ui.define([
                         });
 
                     } else {
-                        MessageToast.show("Completa los campos vacíos o no validos para continuar.");
+                        MessageToast.show(this.i18n.getText("completarCamposInvalidos"));
                         jQuery.sap.delayedCall(3000, this, function () {
                             this.setStateNone(this.arrayObjectView, "Editar").then(function () {
 
@@ -1228,6 +1229,11 @@ sap.ui.define([
                 this._oViewSettingsDialogAddUsuario = sap.ui.xmlfragment(
                     "com.claro.proveedores.adminusuarios.view.fragments.agregarUsuario",
                     this);
+
+                this._oViewSettingsDialogAddUsuario.setModel(
+                    this.getView().getModel("i18n"),
+                    "i18n"
+                );
 
                 this._oViewSettingsDialogAddUsuario.open();
 
@@ -1259,8 +1265,6 @@ sap.ui.define([
                 this._oViewSettingsDialogAddUsuario.destroy();
             },
 
-
-
             addUsuario: function () {
                 var oInputCorreoUsuario = sap.ui.getCore().byId("oInputCorreoUsuarioId");
                 var oInputNombreUsuario = sap.ui.getCore().byId("oInputNombreUsuarioId");
@@ -1285,12 +1289,12 @@ sap.ui.define([
                             AccessToken: this.jsonDataAuth0.token_auth0,
                             Url: this.jsonDataAuth0.url
                         };
-                        MessageBox.show("¿Seguro deseas realizar está acción?", {
+                        MessageBox.show(this.i18n.getText("confirmarAccion"), {
                             icon: sap.m.MessageBox.Icon.QUESTION,
-                            title: "Aviso",
-                            actions: ["Aceptar", "Cancelar"],
+                            title: this.i18n.getText("aviso"),
+                            actions: [this.i18n.getText("aceptar"), this.i18n.getText("cancelar")],
                             onClose: function (sAction) {
-                                if (sAction === 'Aceptar') {
+                                if (sAction === this.i18n.getText("aceptar")) {
                                     this.openBusyDialog();
                                     var url = this.getOwnerComponent().getManifestObject().resolveUri('../PORTAL_PROVEEDORES_REST/cUsersMaster');
                                     var settings = {
@@ -1309,7 +1313,7 @@ sap.ui.define([
 
                                             var respuestaRU = oDataRU;
                                             this.BusyDialog.close();
-                                            MessageToast.show("Proceso finalizado correctamente");
+                                            MessageToast.show(this.i18n.getText("procesoFinalizado"));
                                             setTimeout(() => {
                                                 this.oActualizarVista();
                                             }, 1000);
@@ -1323,7 +1327,7 @@ sap.ui.define([
                             }.bind(this)
                         });
                     } else {
-                        MessageToast.show("Completa los campos vacíos o no validos para continuar.");
+                        MessageToast.show(this.i18n.getText("completarCamposInvalidos"));
                         jQuery.sap.delayedCall(3000, this, function () {
                             this.setStateNone(this.arrayObjectView, "").then(function () {
 
@@ -1533,7 +1537,7 @@ sap.ui.define([
                                     if (camp.getVisible()) {
                                         if (item[l].type === "ip" || item[l].type === "dt") {
                                             value = camp.getValue().toString();
-                                            if (value.trim().length === 0 || value.trim() === "Selecciona aquí...") {
+                                            if (value.trim().length === 0 || value.trim() === this.i18n.getText("seleccionaAqui")) {
                                                 camp.setValueState("Error");
                                                 error = true;
                                             }
@@ -1705,7 +1709,7 @@ sap.ui.define([
                 var re = /^([\da-z_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
                 if (!re.exec(value)) {
                     inputUser.setValueState("Error");
-                    inputUser.setValueStateText("Correo Inválido");
+                    inputUser.setValueStateText(this.i18n.getText("correoInvalido"));
                     this.checkCorreo = false;
                 } else {
                     inputUser.setValueState("None");
@@ -1965,7 +1969,7 @@ sap.ui.define([
                                 this.cargaMasiva().then(function (respuestaCargaMasiva) {
                                     if (respuestaCargaMasiva.resolve) {
 
-                                        sap.ui.getCore().byId("BusyIndicatorText").setText("¡Listo!");
+                                        sap.ui.getCore().byId("BusyIndicatorText").setText(this.i18n.getText("listo"));
                                         jQuery.sap.delayedCall(1000, this, function () {
                                             this.cerrarDialogoCargaMasiva();
                                             this.BusyDialogUserClose();
@@ -1994,7 +1998,7 @@ sap.ui.define([
                     }.bind(this);
                     reader.readAsBinaryString(file);
                 } else {
-                    MessageToast.show('Carga un archivo CSV para continuar.');
+                    MessageToast.show(this.i18n.getText("cargaArchivoCSV"));
                 }
             },
 
@@ -2037,8 +2041,13 @@ sap.ui.define([
 
                                     } else {
                                         var numAvance = i + 1;
-                                        sap.ui.getCore().byId("BusyIndicatorText").setText("Datos validados correctamente " + datosValidadosTotal +
-                                            "... Creando (" + numAvance + " de " + datosValidadosTotal + ")");
+                                        // sap.ui.getCore().byId("BusyIndicatorText").setText("Datos validados correctamente " + datosValidadosTotal +
+                                        //     "... Creando (" + numAvance + " de " + datosValidadosTotal + ")");
+                                        sap.ui.getCore().byId("BusyIndicatorText").setText(this.i18n.getText("datosValidadosCreando", [
+                                            datosValidadosTotal,
+                                            numAvance,
+                                            datosValidadosTotal
+                                        ]));
 
                                         var element = datosFunction.datosValidados[i];
                                         let tipoUsuario = this.getTipoUsuario(element.TIPO_USUARIO);
@@ -2139,8 +2148,13 @@ sap.ui.define([
 
                                     } else {
                                         var numAvance = i + 1;
-                                        sap.ui.getCore().byId("BusyIndicatorText").setText("Datos validados correctamente " + datosValidadosTotal +
-                                            "... Procesando (" + numAvance + " de " + datosValidadosTotal + ")");
+                                        // sap.ui.getCore().byId("BusyIndicatorText").setText("Datos validados correctamente " + datosValidadosTotal +
+                                        //     "... Procesando (" + numAvance + " de " + datosValidadosTotal + ")");
+                                        sap.ui.getCore().byId("BusyIndicatorText").setText(this.i18n.getText("datosValidadosProcesando", [
+                                            datosValidadosTotal,
+                                            numAvance,
+                                            datosValidadosTotal
+                                        ]));
 
                                         var element = datosFunction.datosValidados[i];
                                         let tipoUsuario = this.getTipoUsuario(element.TIPO_USUARIO);
@@ -2149,7 +2163,10 @@ sap.ui.define([
                                         this.verificarProveedor(element.CODIGO_PROVEEDOR).then(function (existeProveedor) {
                                             if (!existeProveedor) {
                                                 element.status = 404;
-                                                element.motivo = "El proveedor con código " + element.CODIGO_PROVEEDOR + " no existe";
+                                                element.motivo = this.i18n.getText(
+                                                    "proveedorNoExiste",
+                                                    [element.CODIGO_PROVEEDOR]
+                                                );;
                                                 i++;
                                                 avanceFinal++;
                                                 functionCreateUserAuth0yHana(datosFunction, i);
@@ -2192,7 +2209,7 @@ sap.ui.define([
                                                     if (asignacionExitosa) {
                                                         this.setLogSystem("Creación", oDataRU.message + " | Proveedor asignado", oDataRU.data).then(function () {
                                                             element.status = 200;
-                                                            element.motivo = "Usuario creado y proveedor asignado correctamente";
+                                                            element.motivo = this.i18n.getText("usuarioCreadoProveedorAsignado");
                                                             i++;
                                                             avanceFinal++;
                                                             functionCreateUserAuth0yHana(datosFunction, i);
@@ -2201,7 +2218,7 @@ sap.ui.define([
                                                         // Si falla la asignación pero el usuario se creó
                                                         this.setLogSystem("Creación", oDataRU.message + " | Error al asignar proveedor", oDataRU.data).then(function () {
                                                             element.status = 206; // Partial success
-                                                            element.motivo = "Usuario creado pero no se pudo asignar el proveedor";
+                                                            element.motivo = this.i18n.getText("usuarioCreadoProveedorNoAsignado");
                                                             i++;
                                                             avanceFinal++;
                                                             functionCreateUserAuth0yHana(datosFunction, i);
@@ -2211,7 +2228,7 @@ sap.ui.define([
 
                                             }.bind(this)).fail(function (jqXHR, textStatus, errorThrown) {
                                                 element.status = jqXHR.responseJSON.status || 500;
-                                                element.motivo = jqXHR.responseJSON.message || "Error al crear usuario";
+                                                element.motivo = jqXHR.responseJSON.message || this.i18n.getText("errorCrearUsuario");
                                                 i++;
                                                 avanceFinal++;
                                                 functionCreateUserAuth0yHana(datosFunction, i);
@@ -2444,15 +2461,15 @@ sap.ui.define([
                     function resolver(resolve) {
                         var value = datos.CORREO;
                         if (value === null || value === undefined) {
-                            datos.motivo = "Campo obligatorio, no puede ser vacío.";
+                            datos.motivo = this.i18n.getText("campoObligatorio");
                             resolve(false);
                         } else if (value.length < 1) {
-                            datos.motivo = "Campo obligatorio, no puede ser vacío.";
+                            datos.motivo = this.i18n.getText("campoObligatorio");
                             resolve(false);
                         }
                         var re = /^([\da-z_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
                         if (!re.exec(value)) {
-                            datos.motivo = "El formato del correo no es válido.";
+                            datos.motivo = this.i18n.getText("formatoCorreoInvalido");
                             resolve(false);
                         } else {
                             resolve(true);
@@ -2465,10 +2482,10 @@ sap.ui.define([
                     function resolver(resolve) {
                         var value = datos.NOMBRE_APELLIDO;
                         if (value === null || value === undefined) {
-                            datos.motivo = "Campo obligatorio, no puede ser vacío.";
+                            datos.motivo = this.i18n.getText("campoObligatorio");
                             resolve(false);
                         } else if (value.length < 1) {
-                            datos.motivo = "Campo obligatorio, no puede ser vacío.";
+                            datos.motivo = this.i18n.getText("campoObligatorio");
                             resolve(false);
                         } else {
                             resolve(true);
@@ -2482,10 +2499,10 @@ sap.ui.define([
                     function resolver(resolve) {
                         var value = datos.TIPO_USUARIO;
                         if (value === null || value === undefined) {
-                            datos.motivo = "Campo obligatorio, no puede ser vacío.";
+                            datos.motivo = this.i18n.getText("campoObligatorio");
                             resolve(false);
                         } else if (value.length < 1) {
-                            datos.motivo = "Campo obligatorio, no puede ser vacío.";
+                            datos.motivo = this.i18n.getText("campoObligatorio");
                             resolve(false);
                         } else {
                             resolve(true);
@@ -2540,7 +2557,7 @@ sap.ui.define([
                     customHeader: new sap.m.Bar({
                         contentMiddle: [
                             new sap.m.Text({
-                                text: "Informe Carga Masiva"
+                                text: this.i18n.getText("informeCargaMasiva")
                             })
                         ],
                         contentLeft: [oBackButton]
@@ -2553,7 +2570,7 @@ sap.ui.define([
                 for (var i = 0; i < datos.datosValidados.length; i++) {
                     var json_i = {
                         type: 'Success',
-                        title: 'Usuario ' + datos.datosValidados[i].NOMBRE_APELLIDO + ' fue creado correctamente.',
+                        title: this.i18n.getText("usuarioCreadoCorrectamente", [datos.datosValidados[i].NOMBRE_APELLIDO]),
                         description: "",
                         subtitle: "",
                         group: datos.datosValidados[i].TIPO_USUARIO
@@ -2561,9 +2578,9 @@ sap.ui.define([
 
                     if (datos.datosValidados[i].status !== 200) {
                         json_i.type = 'Error';
-                        json_i.title = 'No fue posible crear al usuario ' + datos.datosValidados[i].NOMBRE_APELLIDO + '.';
+                        json_i.title = this.i18n.getText("errorCrearUsuarioNombre", [datos.datosValidados[i].NOMBRE_APELLIDO]);
                         json_i.description = datos.datosValidados[i].motivo;
-                        json_i.subtitle = 'Motivo: ' + datos.datosValidados[i].motivo;
+                        json_i.subtitle = this.i18n.getText("motivoError", [datos.datosValidados[i].motivo]);
                     }
 
                     modeloInformeCargaMasiva.getData().push(json_i);
@@ -2572,7 +2589,7 @@ sap.ui.define([
                 for (var a = 0; a < datos.datosConErrores.length; a++) {
                     var json_a = {
                         type: 'Error',
-                        title: 'No fue posible crear al usuario ' + datos.datosConErrores[a].NOMBRE_APELLIDO + '.',
+                        title: this.i18n.getText("errorCrearUsuarioNombre", [datos.datosValidados[i].NOMBRE_APELLIDO]),
                         description: datos.datosConErrores[a].motivo,
                         subtitle: 'Motivo: ' + datos.datosConErrores[a].motivo,
                         group: datos.datosConErrores[a].TIPO_USUARIO

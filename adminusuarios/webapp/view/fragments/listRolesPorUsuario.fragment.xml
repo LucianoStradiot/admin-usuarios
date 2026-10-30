@@ -1,24 +1,25 @@
+
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:u="sap.ui.unified">
-	<Dialog id="dialogAddRol" title="Asignar Rol" type='Message' contentWidth="400px">
-		<content>
-			<ObjectIdentifier class="sapUiTinyMarginBegin" title="Usuario:" text="{NOMBRE} {APELLIDO}"></ObjectIdentifier>
-			<List class="sapUiSmallMarginTop" id="listaRolesId" noDataText="Sin roles asignados" delete="onDeleteRolXUsuario"
-				selectionChange="selecteListItem" updateFinished="alfinalizarListaRoles" mode="None"
-				items="{ path: 'modeloRolesPorUsuario>/', sorter: [{ path: 'RUTORoles/RolesArea/NOMBRE', group: '.grouperList', descending: true}], groupHeaderFactory: '.getGroupHeaderList' }">
-				<headerToolbar>
-					<Toolbar>
-						<Title id="cantidadRolesId" text="Roles(0)" titleStyle="H3"/>
-						<ToolbarSpacer/>
-						<Button id="buttonAddId" icon="sap-icon://add" type="Transparent" press="onListarRoles"></Button>
-						<ToggleButton id="buttonDeleteId" enabled="false" icon="sap-icon://delete" type="Transparent" pressed="false"
-							press="onPressToggleButtonDelete"></ToggleButton>
-					</Toolbar>
-				</headerToolbar>
-				<StandardListItem title="{modeloRolesPorUsuario>RUTORoles/TITULO}" tooltip="{modeloRolesPorUsuario>RUTORoles/TITULO}"/>
-			</List>
-		</content>
-		<buttons>
-			<Button text="Cancelar" press="closeAddRoles"/>
-		</buttons>
-	</Dialog>
+    <Dialog id="dialogAddRol" title="{i18n>asignarRol}" type='Message' contentWidth="400px">
+        <content>
+            <ObjectIdentifier class="sapUiTinyMarginBegin" title="{i18n>usuario}:" text="{NOMBRE} {APELLIDO}"></ObjectIdentifier>
+            <List class="sapUiSmallMarginTop" id="listaRolesId" noDataText="{i18n>sinRolesAsignados}" delete="onDeleteRolXUsuario"
+                selectionChange="selecteListItem" updateFinished="alfinalizarListaRoles" mode="None"
+                items="{ path: 'modeloRolesPorUsuario>/', sorter: [{ path: 'RUTORoles/RolesArea/NOMBRE', group: '.grouperList',descending: true}], groupHeaderFactory: '.getGroupHeaderList' }">
+                <headerToolbar>
+                    <Toolbar>
+                        <Title id="cantidadRolesId" text="{i18n>roles} (0)" titleStyle="H3"/>
+                        <ToolbarSpacer/>
+                        <Button id="buttonAddId" icon="sap-icon://add" type="Transparent" press="onListarRoles"></Button>
+                        <ToggleButton id="buttonDeleteId" enabled="false" icon="sap-icon://delete" type="Transparent" pressed="false"
+                            press="onPressToggleButtonDelete"></ToggleButton>
+                    </Toolbar>
+                </headerToolbar>
+                <StandardListItem title="{modeloRolesPorUsuario>RUTORoles/TITULO}" tooltip="{modeloRolesPorUsuario>RUTORoles/TITULO}"/>
+            </List>
+        </content>
+        <buttons>
+            <Button text="{i18n>cancelar}" press="closeAddRoles"/>
+        </buttons>
+    </Dialog>
 </core:FragmentDefinition>

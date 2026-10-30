@@ -1,42 +1,43 @@
+
 <core:FragmentDefinition xmlns="sap.m"
-	xmlns:core="sap.ui.core"
-	xmlns:fb="sap.ui.comp.filterbar">
-	<Dialog busyIndicatorDelay='0' class="sapUiNoContentPadding" showHeader="true" title="Asignar proveedor" type='Message' contentHeight="450px" contentWidth="550px">
-		<content>
-		<MessageStrip text="Ingresa nombre o código de proveedor para la búsqueda" type="Information" showIcon="true" showCloseButton="false" class="sapUiTinyMarginBegin sapUiSmallMarginTop sapUiTinyMarginEnd">
-			</MessageStrip>
-			<fb:FilterBar id="oFilterbarProveedorId" useToolbar="false" search=".onSearchVendor" showFilterConfiguration="false" showGoOnFB="true">
-				<fb:filterGroupItems>
-					<fb:FilterGroupItem name="Nombre" label="Nombre" groupName="Group1" visibleInFilterBar="true">
-						<fb:control>
-							<Input id="oInputNombreProveedorId"/>
-						</fb:control>
-					</fb:FilterGroupItem>
-					<fb:FilterGroupItem name="Cod.Proveedor" label="Código proveedor" groupName="Group2" visibleInFilterBar="true">
-						<fb:control>
-							<Input id="oInputCodProveedorId" placeholder="" maxLength="10" liveChange="onlyNumber"/>
-						</fb:control>
-					</fb:FilterGroupItem>
-				</fb:filterGroupItems>
-			</fb:FilterBar>
-			<List id="oListSelectProveedoresId" selectionChange="onSelectedItem" mode="SingleSelectLeft" headerText="Proveedores (0)" items="{oModelAllProveedores>/}">
-				<CustomListItem>
-					<HBox alignItems="Center" class="sapUiTinyMargin">
-						<VBox class="sapUiTinyMarginBegin sapUiTinyMarginTopBottom">
-							<Label wrapping="true" text="{oModelAllProveedores>Supplierfullname}" design="Bold"/>
-							<ObjectAttribute title="Código Proveedor" text="{oModelAllProveedores>Supplier}"/>
-							<ObjectAttribute class="marginTop3px" title="RUT" text="{oModelAllProveedores>Taxnumber1}"/>
-							<ObjectAttribute class="marginTop3px" title="Correo" text="{oModelAllProveedores>Emailaddress}"/>
-							<ObjectAttribute class="marginTop3px" title="Teléfono" text="{oModelAllProveedores>Phonenumber}"/>
-							<ObjectAttribute class="marginTop3px" title="Dirección" text="{oModelAllProveedores>Address}, {oModelAllProveedores>Regionname}"/>
-						</VBox>
-					</HBox>
-				</CustomListItem>
-			</List>
-		</content>
-		<buttons>
-			<Button id="buttonGuardarRolesAsignar" enabled="false" type="Emphasized" text="Guardar" press="onGuardarNuevoProveedor"/>
-			<Button text="Cancelar" press="closeonListarProveedores"/>
-		</buttons>
-	</Dialog>
+    xmlns:core="sap.ui.core"
+    xmlns:fb="sap.ui.comp.filterbar">
+    <Dialog busyIndicatorDelay='0' class="sapUiNoContentPadding" showHeader="true" title="{i18n>asignarProveedor}" type='Message' contentHeight="450px" contentWidth="550px">
+        <content>
+            <MessageStrip text="{i18n>mensajeBuscarProveedor}" type="Information" showIcon="true" showCloseButton="false" class="sapUiTinyMarginBegin sapUiSmallMarginTop sapUiTinyMarginEnd">
+            </MessageStrip>
+            <fb:FilterBar id="oFilterbarProveedorId" useToolbar="false" search=".onSearchVendor" showFilterConfiguration="false" showGoOnFB="true">
+                <fb:filterGroupItems>
+                    <fb:FilterGroupItem name="{i18n>nombre}" label="{i18n>nombre}" groupName="Group1" visibleInFilterBar="true">
+                        <fb:control>
+                            <Input id="oInputNombreProveedorId"/>
+                        </fb:control>
+                    </fb:FilterGroupItem>
+                    <fb:FilterGroupItem name="{i18n>codigoProveedor}" label="{i18n>codigoProveedor}" groupName="Group2" visibleInFilterBar="true">
+                        <fb:control>
+                            <Input id="oInputCodProveedorId" placeholder="" maxLength="10" liveChange="onlyNumber"/>
+                        </fb:control>
+                    </fb:FilterGroupItem>
+                </fb:filterGroupItems>
+            </fb:FilterBar>
+            <List id="oListSelectProveedoresId" selectionChange="onSelectedItem" mode="SingleSelectLeft" headerText="{i18n>proveedores} (0)" items="{oModelAllProveedores>/}">
+                <CustomListItem>
+                    <HBox alignItems="Center" class="sapUiTinyMargin">
+                        <VBox class="sapUiTinyMarginBegin sapUiTinyMarginTopBottom">
+                            <Label wrapping="true" text="{oModelAllProveedores>Supplierfullname}" design="Bold"/>
+                            <ObjectAttribute title="{i18n>codigoProveedor}" text="{oModelAllProveedores>Supplier}"/>
+                            <ObjectAttribute class="marginTop3px" title="{i18n>rut}" text="{oModelAllProveedores>Taxnumber1}"/>
+                            <ObjectAttribute class="marginTop3px" title="{i18n>correo}" text="{oModelAllProveedores>Emailaddress}"/>
+                            <ObjectAttribute class="marginTop3px" title="{i18n>telefono}" text="{oModelAllProveedores>Phonenumber}"/>
+                            <ObjectAttribute class="marginTop3px" title="{i18n>direccion}" text="{oModelAllProveedores>Address}, {oModelAllProveedores>Regionname}"/>
+                        </VBox>
+                    </HBox>
+                </CustomListItem>
+            </List>
+        </content>
+        <buttons>
+            <Button id="buttonGuardarRolesAsignar" enabled="false" type="Emphasized" text="{i18n>guardar}" press="onGuardarNuevoProveedor"/>
+            <Button text="{i18n>cancelar}" press="closeonListarProveedores"/>
+        </buttons>
+    </Dialog>
 </core:FragmentDefinition>

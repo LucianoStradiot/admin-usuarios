@@ -1,34 +1,33 @@
-<core:FragmentDefinition xmlns="sap.m"
-	xmlns:core="sap.ui.core">
-	<ViewSettingsDialog confirm="handleFilterDialogConfirm" resetFilters="onResetFilter">
-		<filterItems>
-			<ViewSettingsFilterItem text="Nombre" key="DATA_AUTH0/name" multiSelect="false" items="{oModelFilter0>/}">
-				<items>
-					<ViewSettingsItem text="{oModelFilter0>key}" key="{oModelFilter0>key}"/>
-				</items>
-			</ViewSettingsFilterItem>
-			<ViewSettingsFilterItem text="Correo" key="EMAIL" multiSelect="false" items="{oModelFilter1>/}">
-				<items>
-					<ViewSettingsItem text="{oModelFilter1>key}" key="{oModelFilter1>key}"/>
-				</items>
-			</ViewSettingsFilterItem>
-			<ViewSettingsFilterItem text="Tipo usuario" key="DESCRIPTION_USERTYPE" multiSelect="false" items="{oModelFilter2>/}">
-				<items>
-					<ViewSettingsItem text="{oModelFilter2>key}" key="{oModelFilter2>key}"/>
-				</items>
-			</ViewSettingsFilterItem>
-			<ViewSettingsFilterItem text="Estado auth0" key="BLOCKED_AUTH0_TEXT" multiSelect="false" items="{oModelFilter3>/}">
-				<items>
-					<ViewSettingsItem text="{oModelFilter3>text}" key="{oModelFilter3>key}"/>
-				</items>
-			</ViewSettingsFilterItem>
-			<ViewSettingsFilterItem text="Estado portal" key="DESCRIPTION_USERSTATUS" multiSelect="false" items="{oModelFilter4>/}">
-				<items>
-					<ViewSettingsItem text="{oModelFilter4>key}" key="{oModelFilter4>key}"/>
-				</items>
-			</ViewSettingsFilterItem>
-		</filterItems>
-	</ViewSettingsDialog>
-</core:FragmentDefinition>					
 
-			
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    <ViewSettingsDialog confirm="handleFilterDialogConfirm" resetFilters="onResetFilter">
+        <filterItems>
+            <ViewSettingsFilterItem text="{i18n>nombre}" key="DATA_AUTH0/name" multiSelect="false" items="{oModelFilter0>/}">
+                <items>
+                    <ViewSettingsItem text="{oModelFilter0>key}" key="{oModelFilter0>key}"/>
+                </items>
+            </ViewSettingsFilterItem>
+            <ViewSettingsFilterItem text="{i18n>correo}" key="EMAIL" multiSelect="false" items="{oModelFilter1>/}">
+                <items>
+                    <ViewSettingsItem text="{oModelFilter1>key}" key="{oModelFilter1>key}"/>
+                </items>
+            </ViewSettingsFilterItem>
+            <ViewSettingsFilterItem text="{i18n>tipoUsuario}" key="DESCRIPTION_USERTYPE" multiSelect="false" items="{oModelFilter2>/}">
+                <items>
+                    <ViewSettingsItem text="{oModelFilter2>key}" key="{oModelFilter2>key}"/>
+                </items>
+            </ViewSettingsFilterItem>
+            <ViewSettingsFilterItem text="{i18n>estadoAuth0}" key="BLOCKED_AUTH0_TEXT" multiSelect="false" items="{oModelFilter3>/}">
+                <items>
+                    <ViewSettingsItem text="{oModelFilter3>text}" key="{oModelFilter3>key}"/>
+                </items>
+            </ViewSettingsFilterItem>
+            <ViewSettingsFilterItem text="{i18n>estadoPortal}" key="DESCRIPTION_USERSTATUS" multiSelect="false" items="{oModelFilter4>/}">
+                <items>
+                    <ViewSettingsItem text="{oModelFilter4>key}" key="{oModelFilter4>key}"/>
+                </items>
+            </ViewSettingsFilterItem>
+        </filterItems>
+    </ViewSettingsDialog>
+</core:FragmentDefinition>

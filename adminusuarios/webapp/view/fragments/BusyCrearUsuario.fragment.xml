@@ -1,10 +1,11 @@
+
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:u="sap.ui.unified">
-	<Dialog title="Cargando" type='Message' contentWidth="400px">
-		<content>
-			<ProgressIndicator id="progressIndicatoirId" class="sapUiSmallMarginBottom" percentValue="0" displayValue="" showValue="true" state="Success"/>
-			<VBox alignItems="Center" justifyContent="Center">
-				<BusyIndicator id="BusyIndicatorText" text="Este proceso puede tardar varios minutos..." class="sapUiSmallMarginBottom"/>
-			</VBox>
-		</content>
-	</Dialog>
+    <Dialog title="{i18n>cargando}" type="Message" contentWidth="400px">
+        <content>
+            <ProgressIndicator id="progressIndicatoirId" class="sapUiSmallMarginBottom" percentValue="0" displayValue="" showValue="true" state="Success"/>
+            <VBox alignItems="Center" justifyContent="Center">
+                <BusyIndicator id="BusyIndicatorText" text="{i18n>procesoPuedeTardar}" class="sapUiSmallMarginBottom"/>
+            </VBox>
+        </content>
+    </Dialog>
 </core:FragmentDefinition>

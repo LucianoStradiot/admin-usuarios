@@ -1,46 +1,47 @@
+
 <core:FragmentDefinition xmlns="sap.m"
-	xmlns:core="sap.ui.core"
-	xmlns:u="sap.ui.unified">
-	<Dialog id="dialogAddRolProveedores" class="sapUiNoContentPadding" title="Mis proveedores" type='Message' contentHeight="550px" contentWidth="400px">
-		<content>
-			<List id="listaProveedoresId" sticky="HeaderToolbar,InfoToolbar" noDataText="Sin Proveedores asignados" delete="onDeleteProveedorXUsuario" mode="None" items="{ path: 'modeloProveedoresPorUsuario>/', sorter: [{ path: 'DeleteStatus', descending: true,group: '.grouper'}] }">
-				<headerToolbar>
-					<Toolbar>
-						<Title id="cantidadProveedoresId" text="Resultados (0)"/>
-						<ToolbarSpacer/>
-						<Button id="buttonAddProveedoresId" icon="sap-icon://add" type="Transparent" press="onListarProveedores"></Button>
-						<ToggleButton id="buttonDeleteProveedoresId" enabled="false" icon="sap-icon://delete" type="Transparent" pressed="false" press="onPressToggleButtonDelete"></ToggleButton>
-					</Toolbar>
-				</headerToolbar>
-				<infoToolbar>
-					<Toolbar>
-						<SearchField id="oSearchFieldListProveedorId" liveChange="onSearchListProveedor" placeholder="Buscar por nombre o código de proveedor..."/>
-					</Toolbar>
-				</infoToolbar>
-				<CustomListItem>
-					<HBox alignItems="Center" class="sapUiTinyMargin">
-						<VBox class="sapUiTinyMarginBegin sapUiTinyMarginTopBottom">
-							<Label wrapping="true" text="{modeloProveedoresPorUsuario>Supplierfullname}" design="Bold"/>
-							<ObjectAttribute title="Código Proveedor" text="{modeloProveedoresPorUsuario>Supplier}"/>
-							<ObjectAttribute class="marginTop3px" title="RUT" text="{modeloProveedoresPorUsuario>Taxnumber1}"/>
-							<ObjectAttribute class="marginTop3px" title="Correo" text="{modeloProveedoresPorUsuario>Emailaddress}"/>
-							<ObjectAttribute class="marginTop3px" title="Teléfono" text="{modeloProveedoresPorUsuario>Phonenumber}"/>
-							<ObjectAttribute class="marginTop3px" title="Dirección" text="{modeloProveedoresPorUsuario>Address}, {modeloProveedoresPorUsuario>Regionname}"/>
-							<HBox alignItems="Center">
-								<Label text="Estatus asignación portal:"></Label>
-								<Switch type="AcceptReject" change="onChangeStatusProveedor" state="{= ${modeloProveedoresPorUsuario>DeleteStatus} === '0' ? false : true }">
-									<layoutData>
-										<FlexItemData growFactor="1" />
-									</layoutData>
-								</Switch>
-							</HBox>
-						</VBox>
-					</HBox>
-				</CustomListItem>
-			</List>
-		</content>
-		<buttons>
-			<Button text="Cancelar" press="closeAddProveedores"/>
-		</buttons>
-	</Dialog>
+    xmlns:core="sap.ui.core"
+    xmlns:u="sap.ui.unified">
+    <Dialog id="dialogAddRolProveedores" class="sapUiNoContentPadding" title="{i18n>misProveedores}" type='Message' contentHeight="550px" contentWidth="400px">
+        <content>
+            <List id="listaProveedoresId" sticky="HeaderToolbar,InfoToolbar" noDataText="{i18n>sinProveedoresAsignados}" delete="onDeleteProveedorXUsuario" mode="None" items="{ path: 'modeloProveedoresPorUsuario>/', sorter: [{ path: 'DeleteStatus', descending: true,group: '.grouper'}] }">
+                <headerToolbar>
+                    <Toolbar>
+                        <Title id="cantidadProveedoresId" text="{i18n>resultadosProveedores} (0)"/>
+                        <ToolbarSpacer/>
+                        <Button id="buttonAddProveedoresId" icon="sap-icon://add" type="Transparent" press="onListarProveedores"></Button>
+                        <ToggleButton id="buttonDeleteProveedoresId" enabled="false" icon="sap-icon://delete" type="Transparent" pressed="false" press="onPressToggleButtonDelete"></ToggleButton>
+                    </Toolbar>
+                </headerToolbar>
+                <infoToolbar>
+                    <Toolbar>
+                        <SearchField id="oSearchFieldListProveedorId" liveChange="onSearchListProveedor" placeholder="{i18n>buscarProveedor}"/>
+                    </Toolbar>
+                </infoToolbar>
+                <CustomListItem>
+                    <HBox alignItems="Center" class="sapUiTinyMargin">
+                        <VBox class="sapUiTinyMarginBegin sapUiTinyMarginTopBottom">
+                            <Label wrapping="true" text="{modeloProveedoresPorUsuario>Supplierfullname}" design="Bold"/>
+                            <ObjectAttribute title="{i18n>codigoProveedor}" text="{modeloProveedoresPorUsuario>Supplier}"/>
+                            <ObjectAttribute class="marginTop3px" title="{i18n>rut}" text="{modeloProveedoresPorUsuario>Taxnumber1}"/>
+                            <ObjectAttribute class="marginTop3px" title="{i18n>correo}" text="{modeloProveedoresPorUsuario>Emailaddress}"/>
+                            <ObjectAttribute class="marginTop3px" title="{i18n>telefono}" text="{modeloProveedoresPorUsuario>Phonenumber}"/>
+                            <ObjectAttribute class="marginTop3px" title="{i18n>direccion}" text="{modeloProveedoresPorUsuario>Address}, {modeloProveedoresPorUsuario>Regionname}"/>
+                            <HBox alignItems="Center">
+                                <Label text="{i18n>estatusAsignacionPortal}"></Label>
+                                <Switch type="AcceptReject" change="onChangeStatusProveedor" state="{= ${modeloProveedoresPorUsuario>DeleteStatus} === '0' ? false : true }">
+                                    <layoutData>
+                                        <FlexItemData growFactor="1" />
+                                    </layoutData>
+                                </Switch>
+                            </HBox>
+                        </VBox>
+                    </HBox>
+                </CustomListItem>
+            </List>
+        </content>
+        <buttons>
+            <Button text="{i18n>cancelar}" press="closeAddProveedores"/>
+        </buttons>
+    </Dialog>
 </core:FragmentDefinition>

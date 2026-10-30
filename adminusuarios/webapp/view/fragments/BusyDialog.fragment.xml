@@ -1,3 +1,4 @@
+
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
-	<BusyDialog title="Cargando" text="Este proceso puede tardar unos segundos.." showCancelButton="false"/>
+    <BusyDialog title="{i18n>cargando}" text="{i18n>procesoPuedeTardarSegundos}" showCancelButton="false"/>
 </core:FragmentDefinition>
