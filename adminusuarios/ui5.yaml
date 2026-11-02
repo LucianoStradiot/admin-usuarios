@@ -15,13 +15,13 @@ server:
             - /resources
             - /test-resources
           url: https://ui5.sap.com
-          backend:
-          - path: /v2
-            destination: PORTAL_PROVEEDORES_CAP
-          - path: /PORTAL_PROVEEDORES_REST
-            destination: PORTAL_PROVEEDORES_CAP
-          - path: /sap
-            destination: DESTINATION_FIORI_GW
+        backend:
+        - path: /v2
+          destination: PORTAL_PROVEEDORES_CAP
+        - path: /PORTAL_PROVEEDORES_REST
+          destination: PORTAL_PROVEEDORES_CAP
+        - path: /sap
+          destination: DESTINATION_FIORI_GW
     - name: fiori-tools-appreload
       afterMiddleware: compression
       configuration:

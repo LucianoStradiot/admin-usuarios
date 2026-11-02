@@ -21,7 +21,7 @@ sap.ui.define([
             onInit: function () {
                 this._mViewSettingsDialogs = {};
                 this.getOwnerComponent().getRouter().getRoute("view1").attachPatternMatched(this._onObjectMatched, this);
-                sap.ui.getCore().getConfiguration().setLanguage("es");
+                // sap.ui.getCore().getConfiguration().setLanguage("es");
             },
 
             _onObjectMatched: function () {
@@ -117,7 +117,7 @@ sap.ui.define([
                     //let dataResponse = response;
                     dataResponse.forEach(element => {
                         element.BLOCKED_AUTH0 = element.DATA_AUTH0.blocked === undefined || element.DATA_AUTH0.blocked === false ? false : true;
-                        element.BLOCKED_AUTH0_TEXT = element.DATA_AUTH0.blocked === undefined || element.DATA_AUTH0.blocked === false ? "Activo" : "Bloqueado";
+                        element.BLOCKED_AUTH0_TEXT = element.DATA_AUTH0.blocked === undefined || element.DATA_AUTH0.blocked === false ? this.i18n.getText("activo") : this.i18n.getText("bloqueado");
                     });
                     oModeloUsuarioPortal.setData({
                         DATA: dataResponse
@@ -1242,11 +1242,11 @@ sap.ui.define([
                 }.bind(this));
 
                 var oModelEstadoAuth0 = new JSONModel([{
-                    text: "Activo",
+                    text: this.i18n.getText("activo"),
                     key: false
                 },
                 {
-                    text: "Bloqueado",
+                    text: this.i18n.getText("bloqueado"),
                     key: true
                 }]);
 
